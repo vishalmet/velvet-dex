@@ -5,7 +5,7 @@ import BuyandSell from './BuyandSell'
 
 const App = () => {
   return (
-    <div className=' bg-[#27035D] min-h-screen inter-font text-white'>
+    <div className=' bg-[#171628] min-h-screen inter-font text-white'>
       <div className=" flex justify-center items-center min-h-screen">
         <div className=" ">
         <p className=' text-center text-white text-3xl font-semibold pb-3'>All DeFi at your fingertips</p>
