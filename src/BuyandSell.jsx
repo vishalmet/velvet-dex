@@ -93,7 +93,7 @@ const BuyandSell = () => {
                 <LuArrowDownUp className=' text-white' />
             </motion.div>
 
-            <div className='bg-[#171628] w-full h-32 rounded-[16px] p-3'>
+            <div className='bg-[#171628] w-full h-fit rounded-[16px] p-3'>
                 <p className='text-[#6E6D7B]'>You buy</p>
                 <div className="flex justify-between items-center">
                     <input placeholder='0.0' className='w-56 bg-transparent outline-none text-white text-xl font-medium' />
@@ -104,7 +104,10 @@ const BuyandSell = () => {
                         </svg>
                     </motion.button>
                 </div>
+                <p className='flex text-xs text-[#6E6D7B] pt-1 font-medium'>Balance : 0.0</p>
             </div>
+
+            <motion.button whileTap={{ scale:0.9 }} className='mt-3 bg-[#7000ff] hover:bg-[#7000ff]/70 font-semibold w-full rounded-[40px] p-2 text-center'>Buy Now</motion.button>
         </div>
     )
 }

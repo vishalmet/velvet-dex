@@ -10,7 +10,7 @@ const App = () => {
         <div className=" ">
         <p className=' text-center text-white text-3xl font-semibold pb-3'>All DeFi at your fingertips</p>
         <CustomButton />
-        <div className="bg-custom-bg bg-cover bg-center w-[455px] h-96 rounded-b-[32px] p-4">
+        <div className="bg-custom-bg bg-cover bg-center w-[455px] space-y-3 rounded-b-[32px] p-4">
           <CardHead />
           <BuyandSell />
         </div>

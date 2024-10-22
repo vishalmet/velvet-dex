@@ -90,12 +90,7 @@ const CardHead = () => {
                                         </p>
                                     ))}
                                 </div>
-                                <button
-                                    className="bg-[#7000ff] w-full rounded-[40px] p-2 text-center"
-                                    onClick={handleSaveSettings}
-                                >
-                                    Save Settings
-                                </button>
+                    
                                 {selected === "Custom" && (
                                     <div className="mt-4 space-y-2">
                                         <div className="flex items-center gap-2 border border-[#6E6D7B] bg-white/5 rounded-[16px] w-full px-2">
@@ -125,6 +120,13 @@ const CardHead = () => {
                                         )}
                                     </div>
                                 )}
+                                <motion.button
+                                    whileTap={{ scale:0.9 }}
+                                    className="bg-[#7000ff] hover:bg-[#7000ff]/70 w-full rounded-[40px] p-2 text-center"
+                                    onClick={handleSaveSettings}
+                                >
+                                    Save Settings
+                                </motion.button>
                             </div>
                         </div>
                     )}
