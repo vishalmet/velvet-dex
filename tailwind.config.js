@@ -6,7 +6,7 @@ export default {
   theme: {
     extend: {
       backgroundImage: {
-        'custom-bg': "url('../src/assets/BG.png')",
+        'custom-bg': "url('../src/assets/TradeBg.svg')",
       },
       borderColor: {
         'custom-gradient': 'linear-gradient(90deg, #3790FF, #86AFFF, #0067A1)',

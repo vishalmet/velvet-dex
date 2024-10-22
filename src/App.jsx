@@ -10,7 +10,7 @@ const App = () => {
         <div className=" ">
         <p className=' text-center text-white text-3xl font-semibold pb-3'>All DeFi at your fingertips</p>
         <CustomButton />
-        <div className="bg-gradient-to-br from-[#3B1D8F] via-[#6c2bc6] to-[#27035D] w-[455px] h-96 rounded-b-[32px] p-4">
+        <div className="bg-custom-bg bg-cover bg-center w-[455px] h-96 rounded-b-[32px] p-4">
           <CardHead />
           <BuyandSell />
         </div>
