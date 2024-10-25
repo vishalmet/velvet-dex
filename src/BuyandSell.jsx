@@ -1,18 +1,36 @@
 import React, { useState } from 'react'
 import { motion } from 'framer-motion'
 import { LuArrowDownUp } from "react-icons/lu";
+import { TbInfoCircle } from 'react-icons/tb';
+import { IoClose } from 'react-icons/io5';
+import Select from './components/Modals/Select';
 
 
 const BuyandSell = () => {
     // States to hold slider value and max value
     const [value, setValue] = useState(0);
-    const [maxValue, setMaxValue] = useState(20); // Dynamic max value, can change as needed
+    const [maxValue, setMaxValue] = useState(20);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [selected, setSelected] = useState(null);
+
+
+    const openModal = () => {
+        setIsModalOpen(true);
+    };
+
+    const closeModal = () => {
+        setIsModalOpen(false);
+    };
+
+    const options = ["0.25%", "0.5%", "0.75%", "1%", "Custom"];
+
 
     // Function to calculate the position of the label based on the slider value
     const calculateLabelPosition = () => {
         const percentage = (value / maxValue) * 100; // Adjust based on dynamic max value
         return `calc(${percentage}% - 10px)`;  // Adjust label position for better centering
     };
+
 
     // Function to update the background based on the slider value
     const getBackgroundSize = () => {
@@ -32,12 +50,17 @@ const BuyandSell = () => {
                 <p className='text-[#6E6D7B]'>You sell</p>
                 <div className="flex justify-between items-center">
                     <input placeholder='0.0' className='w-56 bg-transparent outline-none text-white text-xl font-medium' />
-                    <motion.button whileTap={{ scale: 0.9 }} className='border border-[#6E6D7B] hover:bg-[#6E6D7B]/20 p-2 px-4 flex text-sm rounded-[16px] items-center'>
+                    <motion.button whileTap={{ scale: 0.9 }}
+                        onClick={openModal}
+                        className='border border-[#6E6D7B] hover:bg-[#6E6D7B]/20 p-2 px-4 flex text-sm rounded-[16px] items-center'>
                         Select token
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="size-4">
                             <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
                         </svg>
                     </motion.button>
+                    {isModalOpen && (
+                        <Select closeModal={closeModal} />
+                    )}
                 </div>
                 <p className='flex justify-end text-xs text-[#6E6D7B] pt-1 font-medium'>Balance : 0.0</p>
                 <div className="flex justify-between items-center">
@@ -97,17 +120,20 @@ const BuyandSell = () => {
                 <p className='text-[#6E6D7B]'>You buy</p>
                 <div className="flex justify-between items-center">
                     <input placeholder='0.0' className='w-56 bg-transparent outline-none text-white text-xl font-medium' />
-                    <motion.button whileTap={{ scale: 0.9 }} className='border border-[#6E6D7B] hover:bg-[#6E6D7B]/20 p-2 px-4 flex text-sm rounded-[16px] items-center'>
+                    <motion.button whileTap={{ scale: 0.9 }} onClick={openModal} className='border border-[#6E6D7B] hover:bg-[#6E6D7B]/20 p-2 px-4 flex text-sm rounded-[16px] items-center'>
                         Select token
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="size-4">
                             <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
                         </svg>
                     </motion.button>
+                    {isModalOpen && (
+                        <Select closeModal={closeModal} />
+                    )}
                 </div>
                 <p className='flex text-xs text-[#6E6D7B] pt-1 font-medium'>Balance : 0.0</p>
             </div>
 
-            <motion.button whileTap={{ scale:0.9 }} className='mt-3 bg-[#7000ff] hover:bg-[#7000ff]/70 font-semibold w-full rounded-[40px] p-2 text-center'>Buy Now</motion.button>
+            <motion.button whileTap={{ scale: 0.9 }} className='mt-3 bg-[#7000ff] hover:bg-[#7000ff]/70 font-semibold w-full rounded-[40px] p-2 text-center'>Buy Now</motion.button>
         </div>
     )
 }
