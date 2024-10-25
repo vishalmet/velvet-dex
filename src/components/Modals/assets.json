@@ -1,0 +1,51 @@
+[
+    {
+      "symbol": "BNB",
+      "address": "0x5fce5d208dc325ff602c77497dc18f8eadac8ada",
+      "name": "Binance Coin",
+      "price": "$591.48",
+      "marketCap": "$86.68B",
+      "volume": "$1.2B"
+    },
+    {
+      "symbol": "ETH",
+      "address": "0x6b175474e89094c44da98b954eedeac495271d0f",
+      "name": "Ethereum",
+      "price": "$4,000",
+      "marketCap": "$500B",
+      "volume": "$30B"
+    },
+    {
+      "symbol": "BNB",
+      "address": "0x5fce5d208dc325ff602c77497dc18f8eadac8ada",
+      "name": "Binance Coin",
+      "price": "$591.48",
+      "marketCap": "$86.68B",
+      "volume": "$1.2B"
+    },
+    {
+      "symbol": "ETH",
+      "address": "0x6b175474e89094c44da98b954eedeac495271d0f",
+      "name": "Ethereum",
+      "price": "$4,000",
+      "marketCap": "$500B",
+      "volume": "$30B"
+    },
+    {
+      "symbol": "BNB",
+      "address": "0x5fce5d208dc325ff602c77497dc18f8eadac8ada",
+      "name": "Binance Coin",
+      "price": "$591.48",
+      "marketCap": "$86.68B",
+      "volume": "$1.2B"
+    },
+    {
+      "symbol": "ETH",
+      "address": "0x6b175474e89094c44da98b954eedeac495271d0f",
+      "name": "Ethereum",
+      "price": "$4,000",
+      "marketCap": "$500B",
+      "volume": "$30B"
+    }
+  ]
+  
