@@ -2,32 +2,41 @@ import React, { useState, useEffect } from 'react';
 import CustomButton from './components/Wallet';
 import CardHead from './components/CardHead';
 import BuyandSell from './BuyandSell';
+import axios from 'axios';
+
 
 const App = () => {
   // State variables for loading, error, and data
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  
   const [tokenInfo, setTokenInfo] = useState(null);
 
   // Function to fetch token information
-  const fetchTokenInfo = async () => {
-    setLoading(true);
-    setError(null);
+  const getTokens = async () => {
     try {
-      const res = await fetch(`https://deep-index.moralis.io/api/v2.2/0x4c88795dfcbe67ea0781357c49055c3bf6181826/erc20?chain=0x38&exclude_spam=true`);
-      const data = await res.json();
-      setTokenInfo(data); // Store the token info in state
-      console.log(data, "token info");
+      const response = await axios.get('https://api.portals.fi/v2/tokens', {
+        headers: { 'Authorization': 'Bearer 31d0857c-0350-4a8f-b5b7-41e388c8e10e' },
+        params: {
+          // search: 'frax',
+          platforms: 'curve',
+          networks: 'base',
+          sortBy: 'liquidity',
+          sortDirection: 'desc'
+        }
+      });
+      console.log(response.data);
     } catch (error) {
-      setError('Failed to fetch token information');
-    } finally {
-      setLoading(false);
+      console.error('Error:', error);
     }
   };
+  
+  
+  
 
   // Trigger fetchTokenInfo on component mount
   useEffect(() => {
-    fetchTokenInfo();
+    getTokens();
   }, []);
 
   return (
@@ -44,14 +53,7 @@ const App = () => {
           </div>
 
           {/* Display loading, error, or token info */}
-          {loading && <p>Loading...</p>}
-          {error && <p className='text-red-500'>{error}</p>}
-          {tokenInfo && (
-            <div>
-              <p>Token Data:</p>
-              <pre>{JSON.stringify(tokenInfo, null, 2)}</pre>
-            </div>
-          )}
+        
         </div>
       </div>
     </div>
