@@ -128,7 +128,7 @@ const Select = ({ closeModal }) => {
                     </div>
 
                     {/* Scrollable Content Area */}
-                    <div className="overflow-y-auto h-[230px] hide-scrollbar space-y-2"> {/* Set height for scrolling */}
+                    <div className="overflow-y-auto h-[240px] hide-scrollbar space-y-2 py-3"> {/* Set height for scrolling */}
                         {assets.map((asset, index) => (
                             <div key={index} className="flex items-center gap-2 border border-white/10 p-2 px-4 rounded-[10px] hover:bg-white/10 ">
                                 <img className="h-3 w-3 flex text-xs" src={asset.image || 'default-image-url'} alt={asset.name || 'default'} />
