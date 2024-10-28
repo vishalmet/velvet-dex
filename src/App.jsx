@@ -15,15 +15,15 @@ const App = () => {
   // Function to fetch token information
   const getTokens = async () => {
     try {
-      const response = await axios.get('https://api.portals.fi/v2/tokens', {
+      const response = await axios.get('https://api.portals.fi/v2/tokens?networks=bsc', {
         headers: { 'Authorization': 'Bearer 31d0857c-0350-4a8f-b5b7-41e388c8e10e' },
-        params: {
-          // search: 'frax',
-          platforms: 'curve',
-          networks: 'base',
-          sortBy: 'liquidity',
-          sortDirection: 'desc'
-        }
+        // params: {
+        //   search: 'frax',
+        //   platforms: 'curve',
+        //   networks: 'base',
+        //   sortBy: 'liquidity',
+        //   sortDirection: 'desc'
+        // }
       });
       console.log(response.data);
     } catch (error) {
