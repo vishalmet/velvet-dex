@@ -4,6 +4,7 @@ import { LuArrowDownUp } from "react-icons/lu";
 import { TbInfoCircle } from 'react-icons/tb';
 import { IoClose } from 'react-icons/io5';
 import Select from './components/Modals/Select';
+// import SelectTest from './components/SelectTest';
 
 
 const BuyandSell = () => {

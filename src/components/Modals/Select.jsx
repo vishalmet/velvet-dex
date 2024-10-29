@@ -26,7 +26,7 @@ const Select = ({ closeModal }) => {
     const getTokens = async () => {
         setLoading(true); // Start loading
         try {
-            const response = await axios.get('https://api.velvet.capital/api/v3/token', {
+            const response = await axios.get('https://api.portals.fi/v2/tokens?networks=bsc', {
                 headers: { 'Authorization': 'Bearer 31d0857c-0350-4a8f-b5b7-41e388c8e10e',
                     //    params: {
         //   search: 'frax',
