@@ -165,14 +165,14 @@ useEffect(() => {
      chainId: 8453,
    };
    console.log(payload)
-
+const authToken = import.meta.env.VITE_AUTH_KEY;
    
      const response = await axios.post(
        "https://api.enso.finance/api/v1/shortcuts/route",
        payload,
        {
          headers: {
-           Authorization: "Bearer 12d6c378-3a33-4690-b832-c0b44b787b3d",
+           Authorization:  `Bearer ${authToken}`,
          },
        }
      );
@@ -462,7 +462,7 @@ const exceedsAllowedDecimals =
 
         {isConnected &&
           selectedTokenBuy &&
-          sellAmount &&
+           !sellAmount<=0 &&
           (exceedsAllowedDecimals ||
           quoteText === "No suitable route found") && (
             <button

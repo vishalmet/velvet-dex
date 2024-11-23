@@ -256,10 +256,11 @@ useEffect(() => {
       const chain = "base"; // Update this based on your requirements
 
       const url = `https://api.portals.fi/v2/tokens?ids=${encodedBatch}&platforms=native&platforms=basic&platforms=aavev2&platforms=aavev2wrapped&platforms=aavev3&platforms=aerodrome&platforms=agave&platforms=alienbase&platforms=apeswap&platforms=apeswap-lending&platforms=arcadia-v2&platforms=arbitrumexchange&platforms=aura&platforms=babydogeswap&platforms=balancerv2&platforms=balancerv2boosted&platforms=bankerjoe&platforms=baseswap&platforms=beethovenx&platforms=beethovenxboosted&platforms=beefy&platforms=biswap&platforms=benqi&platforms=camelotv2&platforms=cian&platforms=compound&platforms=compound-v3&platforms=convex&platforms=curve&platforms=curve-gauges&platforms=dfynv1&platforms=ethena&platforms=etherfi&platforms=equalizer&platforms=euler&platforms=fluid&platforms=fraxswap&platforms=fluxfinance&platforms=harvest-finance&platforms=gamma-thena&platforms=gamma-quickswap&platforms=gamma-camelot&platforms=gearbox&platforms=geist&platforms=gyroscope&platforms=honeyswap&platforms=hop-protocol&platforms=hop-protocol-tokens&platforms=ironbank&platforms=landx-finance&platforms=locus-finance&platforms=mdex&platforms=midas&platforms=mmfinance&platforms=morpho&platforms=moonwell&platforms=nomiswap&platforms=overnight-finance&platforms=pancakeswap&platforms=pangolin&platforms=pendle&platforms=pendle-pt&platforms=pendle-sy&platforms=pendle-yt&platforms=pooltogether&platforms=pooltogether-v5&platforms=quickswap&platforms=radiantv2&platforms=radpie&platforms=revert-finance&platforms=rocketswap&platforms=scream&platforms=seamless-protocol&platforms=shibaswap&platforms=silo-finance&platforms=silo-finance-llama&platforms=sonne-finance&platforms=soswap&platforms=spark&platforms=spiritswap&platforms=spookyswap&platforms=stablecomp&platforms=stakedao&platforms=stakedao-vaults&platforms=stakedao-gauges&platforms=stargate&platforms=sushiswap&platforms=swapbased&platforms=synthswap&platforms=thegranary&platforms=traderjoe&platforms=uniswapv2&platforms=uwulend&platform=velodrome-v2&platforms=venus&platforms=verse&platforms=vesper&platforms=yearn&platforms=yearn-v3&platforms=yearncrv&platforms=yieldyak&platforms=custom&networks=${chain}&sortDirection=asc&limit=250&page=0`;
-
+      const authToken = import.meta.env.VITE_API_KEY;
+       
       const response = await axios.get(url, {
         headers: {
-          Authorization: "Bearer 31d0857c-0350-4a8f-b5b7-41e388c8e10e",
+          Authorization: `Bearer ${authToken}`,
         },
       });
       console.log(response.data.tokens);
