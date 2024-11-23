@@ -204,9 +204,11 @@ const authToken = import.meta.env.VITE_AUTH_KEY;
    }
  };
 
-   useEffect(() => {
-     fetchBestQuote();
-   }, [sellAmount, selectedTokenSell, selectedTokenBuy]);
+  useEffect(() => {
+  if (sellAmount > 0) { // Check if sellAmount is greater than 0
+    fetchBestQuote();
+  }
+}, [sellAmount, selectedTokenSell, selectedTokenBuy]);
 
 
  const handleSwap = async () => {
@@ -365,7 +367,8 @@ const exceedsAllowedDecimals =
             Max
           </button>
           <p className="text-xs text-[#6E6D7B] pt-1 font-medium text-right">
-            Balance: {sellBalance&& formatNumber(sellBalance)} {" "} {selectedTokenSell?.symbol}
+            Balance: {sellBalance && formatNumber(sellBalance)}{" "}
+            {selectedTokenSell?.symbol}
           </p>
         </div>
       </div>
@@ -381,7 +384,7 @@ const exceedsAllowedDecimals =
         <p className="text-[#6E6D7B]">You buy</p>
         <div className="flex justify-between items-center">
           <input
-            value={outAmount}
+            value={sellAmount > 0 ? outAmount : '0.0'}
             placeholder="0.0"
             readOnly
             className="w-56 bg-transparent outline-none text-white text-xl font-medium"
@@ -423,7 +426,8 @@ const exceedsAllowedDecimals =
           <Select closeModal={closeModal} onTokenSelect={handleTokenSelect} />
         )}
         <p className="text-xs text-[#6E6D7B] pt-1 font-medium text-right">
-          Balance: {buyBalance&& formatNumber(buyBalance)} {" "} {selectedTokenBuy?.symbol}
+          Balance: {buyBalance && formatNumber(buyBalance)}{" "}
+          {selectedTokenBuy?.symbol}
         </p>
       </div>
       <div className="mt-1">
@@ -444,8 +448,7 @@ const exceedsAllowedDecimals =
         {isConnected &&
           selectedTokenBuy &&
           selectedTokenBuy.address !== selectedTokenSell?.address &&
-          (sellAmount<=0 ||
-          sellAmount === "") && (
+          (sellAmount <= 0 || sellAmount === "") && (
             <button className="mt-3 bg-[#7000ff]/70 hover:bg-[#7000ff]/70 font-semibold w-full rounded-[40px] p-2 text-center text-[#ffffffba]">
               Enter Amount
             </button>
@@ -462,9 +465,10 @@ const exceedsAllowedDecimals =
 
         {isConnected &&
           selectedTokenBuy &&
-           !sellAmount<=0 &&
+          sellAmount > 0 &&
+          selectedTokenBuy?.address !== selectedTokenSell?.address &&
           (exceedsAllowedDecimals ||
-          quoteText === "No suitable route found") && (
+            quoteText === "No suitable route found") && (
             <button
               className="mt-3 bg-[#7000ff]/70 hover:bg-[#7000ff]/70 font-semibold w-full rounded-[40px] p-2 text-center text-[#ffffffba]"
               disabled
@@ -479,6 +483,7 @@ const exceedsAllowedDecimals =
           selectedTokenBuy &&
           sellAmount &&
           outAmount !== "-" &&
+          selectedTokenBuy?.address !== selectedTokenSell?.address &&
           isInsufficientBalance && (
             <button
               className="mt-3 bg-[#7000ff]/70 hover:bg-[#7000ff]/70 font-semibold w-full rounded-[40px] p-2 text-center text-[#ffffffba]"
@@ -490,7 +495,7 @@ const exceedsAllowedDecimals =
 
         {isConnected &&
           selectedTokenBuy &&
-          sellAmount &&
+          sellAmount > 0 &&
           quoteText !== "No suitable route found" &&
           outAmount &&
           !exceedsAllowedDecimals &&
