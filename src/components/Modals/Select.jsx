@@ -298,8 +298,7 @@ useEffect(() => {
        };
         const updatedAssets = [ethToken, ...tokens];
         setAssets(updatedAssets);
-      console.log(updatedAssets);
-
+      
     } catch (err) {
       console.log(err.message);
     } finally {

@@ -71,7 +71,7 @@ export const swapTokenMetaSolver = async (
     sellTokenDecimal = "18";
   }
 
-  console.log("sellTokenDecimal",sellTokenDecimal)
+  
 
   let buyTokenDecimal;
   if (
@@ -87,37 +87,33 @@ export const swapTokenMetaSolver = async (
     buyTokenDecimal = "18";
   }
 
-  console.log("buyTokenDecimal",buyTokenDecimal)
+  
 
   const amountDecimalCheck = countTotalDigits(amount);
 
-  console.log("amountDecimalCheck",amountDecimalCheck)
+  
 
   if (
     sellTokenAddress.toLowerCase() !==
     "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
   ) {
-    console.log("inside the if class")
+    
     const Erc20Instance = new web3.eth.Contract(Erc20Abi, sellTokenAddress);
 
     const getAllowance = await Erc20Instance.methods
       .allowance(userAddress, metaSolverData?.tx.to)
       .call();
 
-      console.log("allowance",getAllowance)
+     
 
     const convertedAllowance = convertToInt(
       getAllowance,
       Number(sellTokenDecimal)
     );
 
-    console.log("converted AL",convertedAllowance)
+    
     if (parseFloat(convertedAllowance) < parseFloat(amount)) {
-      console.log("before approved")
-
-      console.log("metaSolverData",metaSolverData)
-
-      console.log("afdadfs",ethers.utils.parseUnits(amount, sellTokenDecimal))
+      
       await Erc20Instance.methods
         .approve(
           metaSolverData?.tx?.to,
@@ -130,7 +126,7 @@ export const swapTokenMetaSolver = async (
           gasPrice: gasPrice.toString(),
         });
 
-        console.log("approved")
+        
     }
   }
 

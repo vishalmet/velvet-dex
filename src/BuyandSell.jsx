@@ -208,12 +208,7 @@ const authToken = import.meta.env.VITE_AUTH_KEY;
      setBestQuote(response.data);
      setQuoteText('')
      setOutAmount(formattedAmountOut); // Use the formatted value
-     console.log("Best Quote:", response.data);
-     console.log(
-       "Formatted Amount Out:",
-       formattedAmountOut,
-       selectedTokenBuy?.decimals
-     );
+     
    } catch (error) {
      setOutAmount('-')
      setQuoteText('No suitable route found')
@@ -259,8 +254,7 @@ const authToken = import.meta.env.VITE_AUTH_KEY;
        selectedTokenSell?.decimals || 18
      );
 
-     console.log(amountInWei.toString());
-     console.log("sell", amountInWei);
+     
      setShowTradeAsset(true);
 
      const receipt = await swapTokenMetaSolver(
@@ -273,7 +267,7 @@ const authToken = import.meta.env.VITE_AUTH_KEY;
        bestQuote // Make sure bestQuote is valid and populated
      );
 
-     console.log("Swap successful. Transaction receipt:", receipt);
+     
      setProcessing(false);
      setSuccess(true); // Mark transaction as successful
       // Reset processing
@@ -289,7 +283,7 @@ const authToken = import.meta.env.VITE_AUTH_KEY;
 
   const isInsufficientBalance =
       parseFloat(sellAmount) > parseFloat(sellBalance);
- console.log(isInsufficientBalance,sellAmount,sellBalance)
+
 
  const handleTradingAssetClose = () =>{
   setShowTradeAsset(false)
