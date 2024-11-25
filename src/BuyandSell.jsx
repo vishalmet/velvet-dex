@@ -7,6 +7,7 @@ import { ethers } from "ethers";
 import { swapTokenMetaSolver } from "./integration"; 
 import Erc20Abi from "./tokenabi.json";
 import TradingAssets from "./components/TradingAssets";
+import eth from './assets/eth.png'
 const BuyandSell = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentModal, setCurrentModal] = useState(null); // "sell" or "buy"
@@ -49,6 +50,12 @@ useEffect(() => {
       if (accounts.length > 0) {
         setIsConnected(true);
         setWalletAddress(accounts[0]);
+         setSelectedTokenSell({
+           symbol: "ETH",
+           address: "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee", // ETH doesn't have a contract address
+           decimals: 18,
+           image: eth, // Provide a valid image path for ETH
+         });
       } else {
         setIsConnected(false);
       }
@@ -62,6 +69,12 @@ useEffect(() => {
     if (accounts.length > 0) {
       setIsConnected(true);
       setWalletAddress(accounts[0]);
+       setSelectedTokenSell({
+         symbol: "ETH",
+         address: "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee", // ETH doesn't have a contract address
+         decimals: 18,
+         image: eth, // Provide a valid image path for ETH
+       });
     } else {
       setIsConnected(false);
     }
@@ -99,20 +112,28 @@ useEffect(() => {
 
     try {
       const provider = new ethers.providers.Web3Provider(window.ethereum);
-      const contract = new ethers.Contract(token.address, Erc20Abi, provider);
-      const balance = await contract.balanceOf(walletAddress);
 
-      // Convert balance from wei to human-readable format
-      const formattedBalance = ethers.utils.formatUnits(
-        balance,
-        token.decimals
-      );
-      setBalance(formattedBalance);
+      if (token.symbol === "ETH") {
+        // Fetch ETH balance directly
+        const balance = await provider.getBalance(walletAddress);
+        const formattedBalance = ethers.utils.formatEther(balance); // ETH has 18 decimals
+        setBalance(formattedBalance);
+      } else {
+        // Fetch ERC20 token balance
+        const contract = new ethers.Contract(token.address, Erc20Abi, provider);
+        const balance = await contract.balanceOf(walletAddress);
+        const formattedBalance = ethers.utils.formatUnits(
+          balance,
+          token.decimals
+        );
+        setBalance(formattedBalance);
+      }
     } catch (error) {
       console.error("Error fetching token balance:", error.message);
       setBalance("0.0");
     }
   };
+
 
 useEffect(() => {
   // Fetch balance for the selected sell token
@@ -292,15 +313,21 @@ const exceedsAllowedDecimals =
     // Count leading zeros in the fractional part
     const leadingZeros = fractionalPart.match(/^0*/)[0].length;
 
+    // Limit the fractional part to three digits after the leading zeros
+    const limitedFraction = fractionalPart.slice(
+      leadingZeros,
+      leadingZeros + 3
+    );
+
     // Format the result with subscript for leading zeros
     return (
       <>
         {integerPart}.0
         <sub>{leadingZeros}</sub>
-        {fractionalPart.slice(leadingZeros)}
+        {limitedFraction}
       </>
     );
-  };
+  };;
 
 
 
@@ -326,6 +353,7 @@ const exceedsAllowedDecimals =
           <motion.button
             whileTap={{ scale: 0.9 }}
             onClick={() => openModal("sell")}
+            disabled={!isConnected}
             className="border border-[#6E6D7B] hover:bg-[#6E6D7B]/20 p-2 px-4 flex text-sm rounded-[16px] items-center"
           >
             {selectedTokenSell ? (

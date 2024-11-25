@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import axios from 'axios';
 import Erc20Abi from "../../tokenabi.json";
 import { ethers } from "ethers";
+import eth from '../../assets/eth.png'
 
 const Select = ({ closeModal, onTokenSelect }) => {
   const [assets, setAssets] = useState([]);
@@ -78,37 +79,48 @@ const Select = ({ closeModal, onTokenSelect }) => {
   }, []);
 
   
-  const fetchTokenBalance = async (token) => {
-    if (!token || !walletAddress || !window.ethereum) {
-      console.error("Missing token, wallet address, or Ethereum provider");
-      return "0";
-    }
+ const fetchTokenBalance = async (token) => {
+   if (!walletAddress || !window.ethereum) {
+     console.error("Missing wallet address or Ethereum provider");
+     return "0";
+   }
 
-    try {
-      const provider = new ethers.providers.Web3Provider(window.ethereum);
-      const contract = new ethers.Contract(token.address, Erc20Abi, provider);
+   try {
+     const provider = new ethers.providers.Web3Provider(window.ethereum);
 
-      // Fetch the balance
-      const balance = await contract.balanceOf(walletAddress);
+     if (token.address === "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee") {
+       // Handle native ETH balance
+       const balance = await provider.getBalance(walletAddress);
+       const formattedBalance = ethers.utils.formatEther(balance);
 
-      // Convert balance to human-readable format
-      const formattedBalance = ethers.utils.formatUnits(
-        balance,
-        token.decimals || 18
-      );
+       setTokenBalances((prev) => ({
+         ...prev,
+         [token.address]: formattedBalance,
+       }));
 
-      // Update the tokenBalances state
-      setTokenBalances((prev) => ({
-        ...prev,
-        [token.address]: formattedBalance,
-      }));
+       return formattedBalance;
+     } else {
+       // Handle ERC20 token balance
+       const contract = new ethers.Contract(token.address, Erc20Abi, provider);
+       const balance = await contract.balanceOf(walletAddress);
+       const formattedBalance = ethers.utils.formatUnits(
+         balance,
+         token.decimals || 18
+       );
 
-      return formattedBalance;
-    } catch (error) {
-      console.error("Error fetching token balance:", error.message);
-      return "0"; // Return 0 as a fallback
-    }
-  };
+       setTokenBalances((prev) => ({
+         ...prev,
+         [token.address]: formattedBalance,
+       }));
+
+       return formattedBalance;
+     }
+   } catch (error) {
+     console.error("Error fetching token balance:", error.message);
+     return "0";
+   }
+ };
+
 
   useEffect(() => {
     if (assets.length > 0 && walletAddress) {
@@ -263,8 +275,31 @@ useEffect(() => {
           Authorization: `Bearer ${authToken}`,
         },
       });
-      console.log(response.data.tokens);
-      setAssets(response.data.tokens);
+       const tokens = response.data.tokens;
+       const ethToken = {
+         address: "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+         addresses: {
+           base: "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+         },
+         decimals: 18,
+         image: eth,
+         key: "base:0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+         liquidity: 4044100000,
+         metadata: {},
+         metrics: {
+           volumeUsd1d: "2622.4153281237977",
+         },
+         name: "ETH",
+         network: "base",
+         platform: "basic",
+         price: 3355.26,
+         symbol: "ETH",
+         totalSupply: "29840000000",
+       };
+        const updatedAssets = [ethToken, ...tokens];
+        setAssets(updatedAssets);
+      console.log(updatedAssets);
+
     } catch (err) {
       console.log(err.message);
     } finally {
@@ -277,26 +312,28 @@ useEffect(() => {
   }, []); // Only call getBscTokenKey on component mount
 
 
- const formatNumber = (num) => {
-  
-   // Convert number to string and split into integer and fractional parts
-   const numStr = num.toString();
-   const [integerPart, fractionalPart] = numStr.split(".");
+const formatNumber = (num) => {
+  // Convert number to string and split into integer and fractional parts
+  const numStr = num.toString();
+  const [integerPart, fractionalPart] = numStr.split(".");
 
-   if (!fractionalPart) return numStr; // Return as-is if no fractional part
+  if (!fractionalPart) return numStr; // Return as-is if no fractional part
 
-   // Count leading zeros in the fractional part
-   const leadingZeros = fractionalPart.match(/^0*/)[0].length;
+  // Count leading zeros in the fractional part
+  const leadingZeros = fractionalPart.match(/^0*/)[0].length;
 
-   // Format the result with subscript for leading zeros
-   return (
-     <>
-       {integerPart}.0
-       <sub>{leadingZeros}</sub>
-       {fractionalPart.slice(leadingZeros)}
-     </>
-   );
- };
+  // Limit the fractional part to three digits after the leading zeros
+  const limitedFraction = fractionalPart.slice(leadingZeros, leadingZeros + 3);
+
+  // Format the result with subscript for leading zeros
+  return (
+    <>
+      {integerPart}.0
+      <sub>{leadingZeros}</sub>
+      {limitedFraction}
+    </>
+  );
+};
 
   useEffect(() => {
     const filtered = assets.filter(
@@ -359,6 +396,7 @@ useEffect(() => {
    // For smaller numbers (showing up to 3 decimals)
    return formatWithDecimals(validNumber);
  }
+
 
 
   // Skeleton Loader Component
