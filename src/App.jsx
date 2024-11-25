@@ -5,6 +5,7 @@ import CardHead from "./components/CardHead";
 import BuyandSell from "./BuyandSell";
 import axios from "axios";
 import TradingAssets from "./components/TradingAssets";
+import velvetlogo from '../src/assets/velvetlogo.svg';
 
 const App = () => {
   
@@ -34,22 +35,22 @@ const App = () => {
     <div className="bg-[#171628] min-h-screen inter-font text-white">
       <div className="flex justify-center items-center min-h-screen">
         <div>
-          <p className="text-center text-white text-3xl font-semibold pb-3">
-            All DeFi at your fingertips
-          </p>
+          <div className="flex items-center gap-4  mx-auto justify-center">
+            <img src={velvetlogo} alt="" className="-mt-3" />
+            <p className="text-center text-white text-2xl font-semibold pb-3">
+              All DeFi at your fingertips
+            </p>
+          </div>
           <CustomButton />
-          <div className="bg-custom-bg bg-cover bg-center w-[455px] space-y-3 rounded-b-[32px] p-4">
+          <div className="bg-custom-bg bg-cover bg-center w-[455px] space-y-1 rounded-b-[32px] px-4 py-2">
             <CardHead />
             <BuyandSell />
           </div>
-
-    
-
-          
-         
+          <p className=" text-base font-semibold text-center leading-5  sm:pt-2 ">
+            Powered by Winks.fun
+          </p>
         </div>
       </div>
-      
     </div>
   );
 };

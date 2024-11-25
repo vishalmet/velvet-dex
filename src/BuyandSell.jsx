@@ -307,7 +307,7 @@ const exceedsAllowedDecimals =
 
   return (
     <div>
-      <div className="bg-[#171628] w-full h-fit rounded-[16px] p-3">
+      <div className="bg-[#171628] w-full h-fit rounded-[16px] px-3 py-1.5">
         <p className="text-[#6E6D7B]">You sell</p>
         <div className="flex justify-between items-center">
           <input
@@ -375,16 +375,16 @@ const exceedsAllowedDecimals =
 
       <motion.div
         whileTap={{ scale: 0.9 }}
-        className="bg-[#171628] p-2 w-fit mx-auto"
+        className="bg-[#171628] px-2 py-1 w-fit mx-auto"
       >
         <LuArrowDownUp className="text-white" />
       </motion.div>
 
-      <div className="bg-[#171628] w-full h-fit rounded-[16px] p-3">
+      <div className="bg-[#171628] w-full h-fit rounded-[16px] px-3 py-1.5">
         <p className="text-[#6E6D7B]">You buy</p>
         <div className="flex justify-between items-center">
           <input
-            value={sellAmount > 0 ? outAmount : '0.0'}
+            value={sellAmount > 0 ? outAmount : "0.0"}
             placeholder="0.0"
             readOnly
             className="w-56 bg-transparent outline-none text-white text-xl font-medium"
@@ -432,7 +432,7 @@ const exceedsAllowedDecimals =
       </div>
       <div className="mt-1">
         {!isConnected && (
-          <button className="mt-3 bg-[#7000ff]/70 hover:bg-[#7000ff]/70 font-semibold w-full rounded-[40px] p-2 text-center text-[#ffffffba]">
+          <button disabled className="mt-3 bg-[#7000ff]/70 hover:bg-[#7000ff]/70 font-semibold w-full rounded-[40px] p-2 text-center text-[#ffffffba]">
             Connect Wallet
           </button>
         )}
@@ -440,7 +440,7 @@ const exceedsAllowedDecimals =
         {isConnected &&
           (!selectedTokenBuy ||
             selectedTokenBuy?.address === selectedTokenSell?.address) && (
-            <button className="mt-3 bg-[#7000ff]/70 hover:bg-[#7000ff]/70 font-semibold w-full rounded-[40px] p-2 text-center text-[#ffffffba]">
+            <button disabled className="mt-3 bg-[#7000ff]/70 hover:bg-[#7000ff]/70 font-semibold w-full rounded-[40px] p-2 text-center text-[#ffffffba]">
               Select Asset
             </button>
           )}
@@ -449,7 +449,7 @@ const exceedsAllowedDecimals =
           selectedTokenBuy &&
           selectedTokenBuy.address !== selectedTokenSell?.address &&
           (sellAmount <= 0 || sellAmount === "") && (
-            <button className="mt-3 bg-[#7000ff]/70 hover:bg-[#7000ff]/70 font-semibold w-full rounded-[40px] p-2 text-center text-[#ffffffba]">
+            <button disabled className="mt-3 bg-[#7000ff]/70 hover:bg-[#7000ff]/70 font-semibold w-full rounded-[40px] p-2 text-center text-[#ffffffba]">
               Enter Amount
             </button>
           )}
