@@ -390,10 +390,10 @@ const formatNumber = (num) => {
             whileTap={{ scale: 0.9 }}
             onClick={() => openModal("sell")}
             disabled={!isConnected}
-            className="border border-[#6E6D7B] hover:bg-[#6E6D7B]/20 sm:p-2 p-1 sm:px-4 flex text-sm rounded-[16px] items-center"
+            className="border  border-[#6E6D7B] hover:bg-[#6E6D7B]/20 sm:p-2 p-1 sm:px-4 flex text-xs sm:text-xl rounded-[16px] items-center "
           >
             {selectedTokenSell ? (
-              <div className="flex gap-0.5 sm:gap-2 text-[12px] sm:text-sm items-center">
+              <div className="flex gap-0.5 sm:gap-2 text-[9px] sm:text-sm items-center">
                 <img
                   src={selectedTokenSell.image}
                   alt=""
@@ -402,7 +402,7 @@ const formatNumber = (num) => {
                 {selectedTokenSell.symbol}
               </div>
             ) : (
-              <p>Select token</p>
+              <p className="sm:text-base text-[8px]">Select token</p>
             )}
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -456,10 +456,10 @@ const formatNumber = (num) => {
           <motion.button
             whileTap={{ scale: 0.9 }}
             onClick={() => openModal("buy")}
-            className="border border-[#6E6D7B] hover:bg-[#6E6D7B]/20 sm:p-2 p-1 sm:px-4 flex text-sm rounded-[16px] items-center"
+            className="border border-[#6E6D7B] hover:bg-[#6E6D7B]/20 sm:p-2 p-1 sm:px-4 flex sm:text-sm rounded-[16px] items-center"
           >
             {selectedTokenBuy ? (
-              <div className="flex gap-0.5 sm:gap-2 text-[12px] sm:text-sm items-center">
+              <div className="flex gap-0.5 sm:gap-2 text-[10px] sm:text-sm items-center">
                 <img
                   src={selectedTokenBuy.image}
                   alt=""
@@ -468,7 +468,7 @@ const formatNumber = (num) => {
                 {selectedTokenBuy.symbol}
               </div>
             ) : (
-              <p>Select token</p>
+              <p className="sm:text-base text-[8px]">Select token</p>
             )}
             <svg
               xmlns="http://www.w3.org/2000/svg"
