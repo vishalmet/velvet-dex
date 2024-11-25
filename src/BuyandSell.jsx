@@ -7,7 +7,15 @@ import { ethers } from "ethers";
 import { swapTokenMetaSolver } from "./integration"; 
 import Erc20Abi from "./tokenabi.json";
 import TradingAssets from "./components/TradingAssets";
-import eth from './assets/eth.png'
+import eth from './assets/eth.png';
+import { 
+  logTokenSelect, 
+  logQuoteFetch, 
+  logBalanceCheck, 
+  logInsufficientBalance,
+  logWalletError 
+} from './firebase';
+
 const BuyandSell = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentModal, setCurrentModal] = useState(null); // "sell" or "buy"
@@ -17,7 +25,7 @@ const BuyandSell = () => {
   const [buyBalance, setBuyBalance] = useState("0.0");
   const [isConnected,setIsConnected] = useState(false)
   const [sellAmount, setSellAmount] = useState(""); // Value from sell input
-    const [sellAmountWei, setSellAmountWei] = useState("");
+  const [sellAmountWei, setSellAmountWei] = useState("");
   const [walletAddress, setWalletAddress] = useState(""); // Replace with dynamic wallet address
   const [bestQuote, setBestQuote] = useState(null); // To display best quote after API call
   const [outAmount, setOutAmount] = useState('');
@@ -41,6 +49,7 @@ useEffect(() => {
     if (!window.ethereum) {
       console.warn("MetaMask not installed");
       setIsConnected(false);
+      logWalletError('wallet_check', 'MetaMask not installed');
       return;
     }
 
@@ -58,10 +67,12 @@ useEffect(() => {
          });
       } else {
         setIsConnected(false);
+        logWalletError('wallet_check', 'No accounts found');
       }
     } catch (error) {
       console.error("Error checking wallet connection:", error.message);
       setIsConnected(false);
+      logWalletError('wallet_check', error.message);
     }
   };
 
@@ -95,13 +106,13 @@ useEffect(() => {
   };
 }, []);
 
-
-
   const handleTokenSelect = (token) => {
     if (currentModal === "sell") {
       setSelectedTokenSell(token);
+      logTokenSelect(token.address, token.symbol, 'sell');
     } else if (currentModal === "buy") {
       setSelectedTokenBuy(token);
+      logTokenSelect(token.address, token.symbol, 'buy');
     }
     closeModal();
   };
@@ -118,6 +129,7 @@ useEffect(() => {
         const balance = await provider.getBalance(walletAddress);
         const formattedBalance = ethers.utils.formatEther(balance); // ETH has 18 decimals
         setBalance(formattedBalance);
+        logBalanceCheck(token.address, token.symbol, formattedBalance);
       } else {
         // Fetch ERC20 token balance
         const contract = new ethers.Contract(token.address, Erc20Abi, provider);
@@ -127,10 +139,12 @@ useEffect(() => {
           token.decimals
         );
         setBalance(formattedBalance);
+        logBalanceCheck(token.address, token.symbol, formattedBalance);
       }
     } catch (error) {
       console.error("Error fetching token balance:", error.message);
       setBalance("0.0");
+      logWalletError('balance_fetch', error.message);
     }
   };
 
@@ -165,6 +179,13 @@ useEffect(() => {
  if (exceedsAllowedDecimals) {
     setOutAmount("-");
     setQuoteText("No suitable route found");
+    logQuoteFetch(
+      selectedTokenSell.address,
+      selectedTokenBuy.address,
+      sellAmount,
+      false,
+      'Exceeds allowed decimals'
+    );
     return;
   }
 
@@ -208,10 +229,22 @@ const authToken = import.meta.env.VITE_AUTH_KEY;
      setBestQuote(response.data);
      setQuoteText('')
      setOutAmount(formattedAmountOut); // Use the formatted value
-     
+     logQuoteFetch(
+       selectedTokenSell.address,
+       selectedTokenBuy.address,
+       sellAmount,
+       true
+     );
    } catch (error) {
      setOutAmount('-')
      setQuoteText('No suitable route found')
+     logQuoteFetch(
+       selectedTokenSell.address,
+       selectedTokenBuy.address,
+       sellAmount,
+       false,
+       error.message
+     );
      console.error(
        "Error fetching best quote:",
     
@@ -226,6 +259,28 @@ const authToken = import.meta.env.VITE_AUTH_KEY;
   }
 }, [sellAmount, selectedTokenSell, selectedTokenBuy]);
 
+  const getDecimalPlaces = (value) => {
+    if (!value.includes(".")) return 0;
+    return value.split(".")[1].length;
+  };
+
+  const exceedsAllowedDecimals =
+    sellAmount &&
+    getDecimalPlaces(sellAmount) > (selectedTokenSell?.decimals || 0);
+
+  const isInsufficientBalance =
+    parseFloat(sellAmount) > parseFloat(sellBalance);
+
+useEffect(() => {
+  if (isInsufficientBalance && selectedTokenSell && sellAmount) {
+    logInsufficientBalance(
+      selectedTokenSell.address,
+      selectedTokenSell.symbol,
+      sellAmount,
+      sellBalance
+    );
+  }
+}, [isInsufficientBalance, selectedTokenSell, sellAmount, sellBalance]);
 
  const handleSwap = async () => {
    if (!window.ethereum) {
@@ -281,23 +336,10 @@ const authToken = import.meta.env.VITE_AUTH_KEY;
    } 
  };
 
-  const isInsufficientBalance =
-      parseFloat(sellAmount) > parseFloat(sellBalance);
-
-
- const handleTradingAssetClose = () =>{
+  const handleTradingAssetClose = () =>{
   setShowTradeAsset(false)
  }
-const getDecimalPlaces = (value) => {
-  if (!value.includes(".")) return 0;
-  return value.split(".")[1].length;
-};
-
-const exceedsAllowedDecimals =
-  sellAmount &&
-  getDecimalPlaces(sellAmount) > (selectedTokenSell?.decimals || 0);
-
-  const formatNumber = (num) => {
+const formatNumber = (num) => {
     // Convert number to string and split into integer and fractional parts
     const numStr = num.toString();
     const [integerPart, fractionalPart] = numStr.split(".");
