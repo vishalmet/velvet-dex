@@ -130,7 +130,7 @@ useEffect(() => {
 
   return (
     <div className="flex justify-between items-center">
-      <p className="text-2xl font-semibold">Trade</p>
+      <p className="sm:text-2xl text-sm font-semibold">Trade</p>
       {/* Network switch button logic */}
       
 

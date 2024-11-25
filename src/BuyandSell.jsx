@@ -370,8 +370,8 @@ const formatNumber = (num) => {
 
   return (
     <div>
-      <div className="bg-[#171628] w-full h-fit rounded-[16px] px-3 py-1.5">
-        <p className="text-[#6E6D7B]">You sell</p>
+      <div className="bg-[#171628] w-full h-fit rounded-xl sm:rounded-[16px] px-1 sm:px-3  py-0.5 sm:py-1.5">
+        <p className="text-[#6E6D7B] text-[12px] sm:text-[17px]">You sell</p>
         <div className="flex justify-between items-center">
           <input
             placeholder="0.0"
@@ -384,25 +384,25 @@ const formatNumber = (num) => {
                 setSellAmount(value);
               }
             }}
-            className="w-56 bg-transparent outline-none text-white text-xl font-medium"
+            className="w-full sm:w-56 bg-transparent outline-none text-white text-sm sm:text-xl font-medium"
           />
           <motion.button
             whileTap={{ scale: 0.9 }}
             onClick={() => openModal("sell")}
             disabled={!isConnected}
-            className="border border-[#6E6D7B] hover:bg-[#6E6D7B]/20 p-2 px-4 flex text-sm rounded-[16px] items-center"
+            className="border border-[#6E6D7B] hover:bg-[#6E6D7B]/20 sm:p-2 p-1 sm:px-4 flex text-sm rounded-[16px] items-center"
           >
             {selectedTokenSell ? (
-              <div className="flex gap-2">
+              <div className="flex gap-0.5 sm:gap-2 text-[12px] sm:text-sm items-center">
                 <img
                   src={selectedTokenSell.image}
                   alt=""
-                  className="h-4 w-4 rounded-full"
+                  className="sm:h-4 sm:w-4 h-3 w-3 rounded-full"
                 />
                 {selectedTokenSell.symbol}
               </div>
             ) : (
-              "Select token"
+              <p>Select token</p>
             )}
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -410,7 +410,7 @@ const formatNumber = (num) => {
               viewBox="0 0 24 24"
               strokeWidth="1.5"
               stroke="currentColor"
-              className="size-4"
+              className="sm:size-4 size-3 ml-3"
             >
               <path
                 strokeLinecap="round"
@@ -425,12 +425,12 @@ const formatNumber = (num) => {
         )}
         <div className="flex justify-between ">
           <button
-            className="bg-[#ffffff14] px-3 py-0.5 rounded-md border-[1px] border-[#ffffff4f]"
+            className="bg-[#ffffff14] sm:px-3 px-2 text-xs sm:text-base sm:py-0.5 rounded-md border-[1px] border-[#ffffff4f]"
             onClick={() => setSellAmount(sellBalance)}
           >
             Max
           </button>
-          <p className="text-xs text-[#6E6D7B] pt-1 font-medium text-right">
+          <p className="text-[10px] sm:text-xs text-[#6E6D7B] pt-0.5 sm:pt-1 font-medium text-right">
             Balance: {sellBalance && formatNumber(sellBalance)}{" "}
             {selectedTokenSell?.symbol}
           </p>
@@ -439,36 +439,36 @@ const formatNumber = (num) => {
 
       <motion.div
         whileTap={{ scale: 0.9 }}
-        className="bg-[#171628] px-2 py-1 w-fit mx-auto"
+        className="bg-[#171628] px-1 sm:px-2 sm:py-1 py-0.5 w-fit mx-auto"
       >
-        <LuArrowDownUp className="text-white" />
+        <LuArrowDownUp className="text-white text-[10px] sm:text-xl" />
       </motion.div>
 
-      <div className="bg-[#171628] w-full h-fit rounded-[16px] px-3 py-1.5">
-        <p className="text-[#6E6D7B]">You buy</p>
+      <div className="bg-[#171628] w-full h-fit rounded-xl sm:rounded-[16px] px-1 sm:px-3  py-0.5 sm:py-1.5">
+        <p className="text-[#6E6D7B] text-[12px] sm:text-[17px]">You buy</p>
         <div className="flex justify-between items-center">
           <input
             value={sellAmount > 0 ? outAmount : "0.0"}
             placeholder="0.0"
             readOnly
-            className="w-56 bg-transparent outline-none text-white text-xl font-medium"
+            className="w-full sm:w-56 bg-transparent outline-none text-white text-sm sm:text-xl font-medium"
           />
           <motion.button
             whileTap={{ scale: 0.9 }}
             onClick={() => openModal("buy")}
-            className="border border-[#6E6D7B] hover:bg-[#6E6D7B]/20 p-2 px-4 flex text-sm rounded-[16px] items-center"
+            className="border border-[#6E6D7B] hover:bg-[#6E6D7B]/20 sm:p-2 p-1 sm:px-4 flex text-sm rounded-[16px] items-center"
           >
             {selectedTokenBuy ? (
-              <div className="flex gap-2">
+              <div className="flex gap-0.5 sm:gap-2 text-[12px] sm:text-sm items-center">
                 <img
                   src={selectedTokenBuy.image}
                   alt=""
-                  className="h-4 w-4 rounded-full"
+                  className="sm:h-4 sm:w-4 h-3 w-3 rounded-full"
                 />
                 {selectedTokenBuy.symbol}
               </div>
             ) : (
-              "Select token"
+              <p>Select token</p>
             )}
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -476,7 +476,7 @@ const formatNumber = (num) => {
               viewBox="0 0 24 24"
               strokeWidth="1.5"
               stroke="currentColor"
-              className="size-4"
+              className="sm:size-4 size-3 ml-3"
             >
               <path
                 strokeLinecap="round"
@@ -489,14 +489,17 @@ const formatNumber = (num) => {
         {isModalOpen && currentModal === "buy" && (
           <Select closeModal={closeModal} onTokenSelect={handleTokenSelect} />
         )}
-        <p className="text-xs text-[#6E6D7B] pt-1 font-medium text-right">
+        <p className="text-[10px] sm:text-xs text-[#6E6D7B] pt-0.5 sm:pt-1 font-medium text-right">
           Balance: {buyBalance && formatNumber(buyBalance)}{" "}
           {selectedTokenBuy?.symbol}
         </p>
       </div>
       <div className="mt-1">
         {!isConnected && (
-          <button disabled className="mt-3 bg-[#7000ff]/70 hover:bg-[#7000ff]/70 font-semibold w-full rounded-[40px] p-2 text-center text-[#ffffffba]">
+          <button
+            disabled
+            className="mt-1 sm:mt-3 bg-[#7000ff]/70 hover:bg-[#7000ff]/70 font-semibold w-full rounded-[40px] p-1 text-xs sm:text-base sm:p-2 text-center text-[#ffffffba]"
+          >
             Connect Wallet
           </button>
         )}
@@ -504,7 +507,10 @@ const formatNumber = (num) => {
         {isConnected &&
           (!selectedTokenBuy ||
             selectedTokenBuy?.address === selectedTokenSell?.address) && (
-            <button disabled className="mt-3 bg-[#7000ff]/70 hover:bg-[#7000ff]/70 font-semibold w-full rounded-[40px] p-2 text-center text-[#ffffffba]">
+            <button
+              disabled
+              className="mt-1 sm:mt-3 bg-[#7000ff]/70 hover:bg-[#7000ff]/70 font-semibold w-full rounded-[40px] p-1 text-xs sm:text-base sm:p-2 text-center text-[#ffffffba]"
+            >
               Select Asset
             </button>
           )}
@@ -513,14 +519,17 @@ const formatNumber = (num) => {
           selectedTokenBuy &&
           selectedTokenBuy.address !== selectedTokenSell?.address &&
           (sellAmount <= 0 || sellAmount === "") && (
-            <button disabled className="mt-3 bg-[#7000ff]/70 hover:bg-[#7000ff]/70 font-semibold w-full rounded-[40px] p-2 text-center text-[#ffffffba]">
+            <button
+              disabled
+              className="mt-1 sm:mt-3 bg-[#7000ff]/70 hover:bg-[#7000ff]/70 font-semibold w-full rounded-[40px] p-1 text-xs sm:text-base sm:p-2 text-center text-[#ffffffba]"
+            >
               Enter Amount
             </button>
           )}
 
         {isConnected && selectedTokenBuy && sellAmount && processing && (
           <button
-            className="mt-3 bg-[#7000ff]/70 hover:bg-[#7000ff]/70 font-semibold w-full rounded-[40px] p-2 text-center text-[#ffffffba]"
+            className="mt-1 sm:mt-3 bg-[#7000ff]/70 hover:bg-[#7000ff]/70 font-semibold w-full rounded-[40px] p-1 text-xs sm:text-base sm:p-2 text-center text-[#ffffffba]"
             disabled
           >
             Please Wait
@@ -534,7 +543,7 @@ const formatNumber = (num) => {
           (exceedsAllowedDecimals ||
             quoteText === "No suitable route found") && (
             <button
-              className="mt-3 bg-[#7000ff]/70 hover:bg-[#7000ff]/70 font-semibold w-full rounded-[40px] p-2 text-center text-[#ffffffba]"
+              className="mt-1 sm:mt-3 bg-[#7000ff]/70 hover:bg-[#7000ff]/70 font-semibold w-full rounded-[40px] p-1 text-xs sm:text-base sm:p-2 text-center text-[#ffffffba]"
               disabled
             >
               {isInsufficientBalance
@@ -550,7 +559,7 @@ const formatNumber = (num) => {
           selectedTokenBuy?.address !== selectedTokenSell?.address &&
           isInsufficientBalance && (
             <button
-              className="mt-3 bg-[#7000ff]/70 hover:bg-[#7000ff]/70 font-semibold w-full rounded-[40px] p-2 text-center text-[#ffffffba]"
+              className="mt-1 sm:mt-3 bg-[#7000ff]/70 hover:bg-[#7000ff]/70 font-semibold w-full rounded-[40px] p-1 text-xs sm:text-base sm:p-2 text-center text-[#ffffffba]"
               disabled
             >
               Insufficient balance
@@ -565,7 +574,7 @@ const formatNumber = (num) => {
           !exceedsAllowedDecimals &&
           !isInsufficientBalance && (
             <button
-              className="mt-3 bg-[#7000ff] hover:bg-[#7000ff]/70 font-semibold w-full rounded-[40px] p-2 text-center cursor-pointer"
+              className="mt-1 sm:mt-3 bg-[#7000ff] hover:bg-[#7000ff]/70 font-semibold w-full rounded-[40px] p-1 sm:p-2 text-xs sm:text-base text-center cursor-pointer"
               onClick={handleSwap}
             >
               Trade

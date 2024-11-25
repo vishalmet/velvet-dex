@@ -411,18 +411,18 @@ const formatNumber = (num) => {
 
   return (
     <div>
-      <div className="fixed inset-0 z-50 flex items-center justify-center backdrop-blur-lg">
-        <div className="bg-[#171628] w-[465px] h-[420px] max-h-[420px] rounded-[16px] p-5 shadow-lg space-y-2">
+      <div className="fixed inset-0 z-50 flex items-center justify-center backdrop-blur-lg p-2">
+        <div className="bg-[#171628] w-full  sm:w-[465px] sm:h-[420px] sm:max-h-[420px] rounded-[16px] p-2 sm:p-5 shadow-lg space-y-2">
           {/* Fixed Header */}
           <div className="flex justify-between items-center">
-            <p className="text-md font-semibold">Select asset</p>
+            <p className="text-xs sm:text-md font-semibold">Select asset</p>
             <IoClose className="size-4 cursor-pointer" onClick={closeModal} />
           </div>
-          <div className="bg-transparent border border-white/10 rounded-[30px] p-2 px-4 flex items-center gap-2">
+          <div className="bg-transparent border border-white/10 rounded-[30px] p-1 sm:p-2 px-2 sm:px-4 flex items-center gap-2">
             <RiSearchLine />
             <input
               type="text"
-              className="w-full bg-transparent outline-none text-sm"
+              className="w-full bg-transparent outline-none text-xs sm:text-sm"
               placeholder="Search by name, symbol or address"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)} // Update search term on input change
@@ -495,13 +495,13 @@ const formatNumber = (num) => {
             </div>
           </div> */}
 
-          <div className="bg-white/5 p-2 px-4 rounded-[10px] text-xs flex justify-between items-center">
+          <div className="bg-white/5 p-1 sm:p-2 px-2 sm:px-4 rounded-[10px] text-[10px] sm:text-xs flex justify-between items-center">
             <p>ASSETS</p>
             <p>BALANCE</p>
           </div>
 
           {/* Scrollable Content Area */}
-          <div className="overflow-y-auto h-[230px] hide-scrollbar space-y-2">
+          <div className="overflow-y-auto h-[170px] sm:h-[230px] hide-scrollbar space-y-1 sm:space-y-2">
             {loading ? (
               [...Array(5)].map((_, index) => <SkeletonLoader key={index} />)
             ) : filteredAssets.length > 0 ? (
@@ -512,12 +512,12 @@ const formatNumber = (num) => {
                     onTokenSelect(asset);
                     closeModal();
                   }}
-                  className={`flex items-center gap-2 border border-white/10 p-2 px-4 rounded-[10px] cursor-pointer ${
+                  className={`flex items-center gap-2 border border-white/10 p-1 sm:p-2 px-2 sm:px-4 rounded-[10px] cursor-pointer ${
                     selectedCard === index ? "bg-white/10" : "hover:bg-white/10"
                   }`}
                 >
                   <img
-                    className="h-5 w-5 flex text-xs border-2 border-white rounded-full"
+                    className="sm:h-5 h-4 w-4 sm:w-5 flex text-xs border-2 border-white rounded-full"
                     src={
                       Array.isArray(asset.images) && asset.images.length > 0
                         ? asset.images[0] ||
@@ -530,13 +530,15 @@ const formatNumber = (num) => {
                   <div className="flex justify-between w-full">
                     <div>
                       <div className="flex items-center gap-1">
-                        <p className="text-xs">{asset.symbol}</p>
-                        <p className="bg-white/5 rounded-[10px] p-1 text-[10px] max-w-32 truncate">
+                        <p className="text-[10px] sm:text-xs">{asset.symbol}</p>
+                        <p className="bg-white/5 rounded-[10px] p-1 text-[9px] sm:text-[10px] max-w-32 truncate">
                           {asset.address}
                         </p>
                       </div>
-                      <p className="text-xs text-[#6E6D7B]">{asset.name}</p>
-                      <div className="flex items-center gap-2 text-[10px]">
+                      <p className="text-[10px] sm:text-xs text-[#6E6D7B]">
+                        {asset.name}
+                      </p>
+                      <div className="flex items-center gap-2 text-[9px] sm:text-[10px]">
                         <p className="text-white/70">
                           ${formatLongNum(asset.price)}
                         </p>
@@ -554,7 +556,7 @@ const formatNumber = (num) => {
                         </p>
                       </div>
                     </div>
-                    <p>
+                    <p className='text-[10px] sm:text-base'>
                       {tokenBalances[asset.address] !== undefined &&
                       tokenBalances[asset.address] !== "0.0"
                         ? tokenBalances[asset.address] &&

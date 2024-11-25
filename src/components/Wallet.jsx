@@ -48,7 +48,7 @@ const CustomButton = () => {
                     if (!connected) {
                       return (
                         <motion.button
-                          className="text-white w-[455px] h-[48px] bg-gradient-to-t from-[#492C81]/60 to-[#7343D2]/60 border border-[#7343D2] hover:from-[#492C81]/30 hover:to-[#7343D2]/30 font-bold rounded-t-[32px] flex justify-center items-center shadow-lg"
+                          className="text-white sm:w-[455px] p-1 text-xs sm:text-lg sm:p-2 w-full sm:h-[48px] bg-gradient-to-t from-[#492C81]/60 to-[#7343D2]/60 border border-[#7343D2] hover:from-[#492C81]/30 hover:to-[#7343D2]/30 font-bold rounded-t-[20px] sm:rounded-t-[32px] flex justify-center items-center shadow-lg"
                           onClick={openConnectModal}
                           type="button"
                           whileTap={{ scale: 0.9 }}
@@ -69,7 +69,7 @@ const CustomButton = () => {
                     if (chain.unsupported) {
                       return (
                         <motion.button
-                          className=" text-white w-[455px] h-[48px] bg-gradient-to-t from-[#492C81]/60 to-[#7343D2]/60 border border-[#7343D2] hover:from-[#492C81]/30 hover:to-[#7343D2]/30 font-bold rounded-t-[32px]"
+                          className=" text-white sm:w-[455px] p-1 text-xs sm:text-lg sm:p-2 w-full sm:h-[48px] rounded-t-[20px] sm:rounded-t-[32px] from-[#492C81]/60 to-[#7343D2]/60 border border-[#7343D2] hover:from-[#492C81]/30 hover:to-[#7343D2]/30 font-bold "
                           onClick={openChainModal}
                           type="button"
                           whileTap={{ scale: 0.9 }}
@@ -80,9 +80,9 @@ const CustomButton = () => {
                     }
 
                     return (
-                      <div className="w-[455px] h-[48px]">
+                      <div className="sm:w-[455px] w-full sm:h-[48px]">
                         <motion.button
-                          className=" text-white p-2 w-full h-[48px] bg-gradient-to-t from-[#492C81]/60 to-[#7343D2]/60 border border-[#7343D2] hover:from-[#492C81]/30 hover:to-[#7343D2]/30 font-bold rounded-t-[32px]"
+                          className=" text-white p-1 text-xs sm:text-lg sm:p-2 w-full sm:h-[48px] bg-gradient-to-t from-[#492C81]/60 to-[#7343D2]/60 border border-[#7343D2] hover:from-[#492C81]/30 hover:to-[#7343D2]/30 font-bold rounded-t-[20px] sm:rounded-t-[32px]"
                           onClick={openAccountModal}
                           whileTap={{ scale: 0.9 }}
                           type="button"

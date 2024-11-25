@@ -25,6 +25,9 @@ export default {
       borderWidth: {
         3: "3px",
       },
+      screens: {
+        sm: "450px", // Custom small screen starting from 450px
+      },
     },
   },
   plugins: [],
