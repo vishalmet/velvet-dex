@@ -6,8 +6,8 @@ import BuyandSell from "./BuyandSell";
 import axios from "axios";
 import TradingAssets from "./components/TradingAssets";
 import velvetlogo from '../src/assets/velvetlogo.svg';
-import velvetheadlogo from '../src/assets/velvetheadlogo.png'
-import baselogo from '../src/assets/baselogo.png'
+import velvetheadlogo from '../src/assets/VelvetCapitalLight.svg'
+import baselogo from '../src/assets/BaseLight.svg'
 
 const App = () => {
   
@@ -37,7 +37,7 @@ const App = () => {
     <div className="bg-black min-h-screen inter-font text-white">
       <div className="flex justify-center items-center min-h-screen p-1 sm:m-0">
         <div>
-          <div className="flex items-center gap-4  mx-auto justify-center mb-1 sm:mb-2 bg-[#fff] w-fit p-0.5 px-1 sm:p-2 rounded-lg">
+          <div className="flex items-center gap-4  mx-auto justify-center mb-1 sm:mb-2 bg-[#fff] w-fit p-0.5 px-1 sm:p-1 rounded-lg">
             <img
               src={velvetheadlogo}
               alt=""
