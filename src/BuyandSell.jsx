@@ -370,8 +370,8 @@ const formatNumber = (num) => {
 
   return (
     <div>
-      <div className="bg-[#171628] w-full h-fit rounded-xl sm:rounded-[16px] px-1 sm:px-3  py-0.5 sm:py-1.5">
-        <p className="text-[#6E6D7B] text-[12px] sm:text-[17px]">You sell</p>
+      <div className="bg-[#171628] w-full h-fit rounded-xl sm:rounded-[16px] px-1 sm:px-3  py-0.5 sm:py-1.5 ">
+        <p className="text-[#6E6D7B] text-[12px] sm:text-[14px]">You sell</p>
         <div className="flex justify-between items-center">
           <input
             placeholder="0.0"
@@ -390,7 +390,7 @@ const formatNumber = (num) => {
             whileTap={{ scale: 0.9 }}
             onClick={() => openModal("sell")}
             disabled={!isConnected}
-            className="border  border-[#6E6D7B] hover:bg-[#6E6D7B]/20 sm:p-2 p-1 sm:px-4 flex text-xs sm:text-xl rounded-[16px] items-center "
+            className="border  border-[#6E6D7B] hover:bg-[#6E6D7B]/20 sm:p-2 p-1 sm:px-4 flex text-xs sm:text-xl rounded-full items-center "
           >
             {selectedTokenSell ? (
               <div className="flex gap-0.5 sm:gap-2 text-[9px] sm:text-sm items-center">
@@ -425,7 +425,7 @@ const formatNumber = (num) => {
         )}
         <div className="flex justify-between ">
           <button
-            className="bg-[#ffffff14] sm:px-3 px-2 text-xs sm:text-base sm:py-0.5 rounded-md border-[1px] border-[#ffffff4f]"
+            className="bg-[#ffffff14]  text-xs sm:text-base  rounded-md border-[1px] border-[#ffffff4f]"
             onClick={() => setSellAmount(sellBalance)}
           >
             Max
@@ -445,7 +445,7 @@ const formatNumber = (num) => {
       </motion.div>
 
       <div className="bg-[#171628] w-full h-fit rounded-xl sm:rounded-[16px] px-1 sm:px-3  py-0.5 sm:py-1.5">
-        <p className="text-[#6E6D7B] text-[12px] sm:text-[17px]">You buy</p>
+        <p className="text-[#6E6D7B] text-[12px] sm:text-[14px]">You buy</p>
         <div className="flex justify-between items-center">
           <input
             value={sellAmount > 0 ? outAmount : "0.0"}
@@ -456,7 +456,7 @@ const formatNumber = (num) => {
           <motion.button
             whileTap={{ scale: 0.9 }}
             onClick={() => openModal("buy")}
-            className="border border-[#6E6D7B] hover:bg-[#6E6D7B]/20 sm:p-2 p-1 sm:px-4 flex sm:text-sm rounded-[16px] items-center"
+            className="border border-[#6E6D7B] hover:bg-[#6E6D7B]/20 sm:p-2 p-1 sm:px-4 flex sm:text-sm rounded-full items-center"
           >
             {selectedTokenBuy ? (
               <div className="flex gap-0.5 sm:gap-2 text-[10px] sm:text-sm items-center">

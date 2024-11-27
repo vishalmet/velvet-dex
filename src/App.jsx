@@ -7,7 +7,7 @@ import axios from "axios";
 import TradingAssets from "./components/TradingAssets";
 import velvetlogo from '../src/assets/velvetlogo.svg';
 import velvetheadlogo from '../src/assets/VelvetCapitalLight.svg'
-import baselogo from '../src/assets/BaseLight.svg'
+import header from '../src/assets/header.png'
 
 const App = () => {
   
@@ -37,17 +37,11 @@ const App = () => {
     <div className="bg-black min-h-screen inter-font text-white">
       <div className="flex justify-center items-center min-h-screen p-1 sm:m-0">
         <div>
-          <div className="flex items-center gap-4  mx-auto justify-center mb-1 sm:mb-2 bg-[#fff] w-fit p-0.5 px-1 sm:p-1 rounded-lg">
-            <img
-              src={velvetheadlogo}
-              alt=""
-              className="sm:h-7 sm:w-40 h-4 w-16"
-            />
-            <p className="sm:text-3xl text-xs  text-black">x</p>
-            <img src={baselogo} alt="" className="sm:h-7 sm:w-24 h-3 w-14" />
+          <div className="flex items-center gap-4  mx-auto justify-center mb-1 sm:mb-2 w-fit p-0.5 px-1 sm:p-1 rounded-lg">
+            <img src={header} alt="" className="w-[300px] h-8 sm:w-[455px] sm:h-14" />
           </div>
           <CustomButton />
-          <div className="bg-custom-bg bg-cover bg-center w-full sm:w-[455px] space-y-0.5 sm:space-y-1 rounded-b-[20px] sm:rounded-b-[32px] px-2 sm:px-4 py-1 sm:py-2">
+          <div className="bg-custom-bg bg-cover bg-center w-full sm:w-[455px] space-y-0.5 sm:space-y-1 rounded-b-[20px] sm:rounded-b-[32px] px-2 sm:px-4 py-1 sm:py-2 sm:pb-[16px]">
             <CardHead />
             <BuyandSell />
           </div>
