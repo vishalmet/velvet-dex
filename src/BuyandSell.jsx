@@ -425,7 +425,7 @@ const formatNumber = (num) => {
         )}
         <div className="flex justify-between ">
           <button
-            className="bg-[#ffffff14]  text-xs sm:text-base  rounded-md border-[1px] border-[#ffffff4f] px-0.5 sm:px-1"
+            className="bg-[#ffffff14]  text-xs sm:text-base  rounded-md border-[1px] border-[#ffffff4f] px-0.5 sm:px-1 "
             onClick={() => setSellAmount(sellBalance)}
           >
             Max

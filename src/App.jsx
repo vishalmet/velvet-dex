@@ -41,7 +41,7 @@ const App = () => {
             <img
               src={header}
               alt=""
-              className="w-[300px] h-[42px] sm:w-[455px] sm:h-[64px]"
+              className="w-[300px] h-[38px] sm:w-[400px] sm:h-[50px]"
             />
           </div>
           <CustomButton />
